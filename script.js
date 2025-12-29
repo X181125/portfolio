@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function typeEffect() {
         const currentTitle = titles[titleIndex];
-        
+
         if (isDeleting) {
             typingText.textContent = currentTitle.substring(0, charIndex - 1);
             charIndex--;
@@ -41,9 +41,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
     typeEffect();
 
+    // ===== COPY EMAIL FUNCTIONALITY =====
+    const copyEmailButtons = document.querySelectorAll('.copy-email');
+
+    copyEmailButtons.forEach(btn => {
+        btn.addEventListener('click', async function (e) {
+            e.preventDefault();
+            const email = this.getAttribute('data-email');
+
+            try {
+                await navigator.clipboard.writeText(email);
+                showCopyNotification('✓ Đã sao chép email!', 'success');
+
+                // Visual feedback on button
+                this.style.color = 'var(--accent-tertiary)';
+                setTimeout(() => {
+                    this.style.color = '';
+                }, 1000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-9999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopyNotification('✓ Đã sao chép email!', 'success');
+                } catch (err) {
+                    showCopyNotification('✗ Không thể sao chép', 'error');
+                }
+                document.body.removeChild(textArea);
+            }
+        });
+    });
+
+    function showCopyNotification(message, type) {
+        // Remove existing notification
+        const existing = document.querySelector('.copy-notification');
+        if (existing) existing.remove();
+
+        // Create notification
+        const notification = document.createElement('div');
+        notification.className = 'copy-notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            padding: 12px 24px;
+            background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #ef4444, #dc2626)'};
+            color: white;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        `;
+        document.body.appendChild(notification);
+
+        // Animate in
+        requestAnimationFrame(() => {
+            notification.style.opacity = '1';
+            notification.style.transform = 'translateX(-50%) translateY(0)';
+        });
+
+        // Remove after delay
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(-50%) translateY(-20px)';
+            setTimeout(() => notification.remove(), 300);
+        }, 2000);
+    }
+
     // ===== CURSOR GLOW EFFECT =====
     const cursorGlow = document.getElementById('cursor-glow');
-    
+
     document.addEventListener('mousemove', (e) => {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top = e.clientY + 'px';
@@ -57,11 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth scroll
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
-            
+
             if (targetSection) {
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
@@ -83,9 +160,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-    }, { 
+    }, {
         rootMargin: '-20% 0px -60% 0px',
-        threshold: 0 
+        threshold: 0
     });
 
     sections.forEach(section => {
@@ -101,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== COUNTER ANIMATION =====
     const counters = document.querySelectorAll('[data-count]');
-    
+
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -109,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const target = parseInt(counter.getAttribute('data-count'));
                 let count = 0;
                 const increment = target / 50;
-                
+
                 const updateCount = () => {
                     if (count < target) {
                         count += increment;
@@ -119,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         counter.textContent = target;
                     }
                 };
-                
+
                 updateCount();
                 counterObserver.unobserve(counter);
             }
@@ -132,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== SKILL BARS ANIMATION =====
     const skillBars = document.querySelectorAll('.progress-fill');
-    
+
     const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -162,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             projectCards.forEach(card => {
                 const categories = card.getAttribute('data-category');
-                
+
                 if (filter === 'all' || categories.includes(filter)) {
                     card.style.display = 'block';
                     card.style.animation = 'fadeInUp 0.5s ease forwards';
@@ -175,12 +252,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== FORM VALIDATION =====
     const contactForm = document.getElementById('contact-form');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.innerHTML;
-            
+
             submitBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Đang gửi...</span>';
             submitBtn.disabled = true;
 
@@ -195,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Real-time validation
         const inputs = contactForm.querySelectorAll('input, textarea');
         inputs.forEach(input => {
-            input.addEventListener('blur', function() {
+            input.addEventListener('blur', function () {
                 if (this.value.trim() === '' && this.hasAttribute('required')) {
                     this.style.borderColor = 'var(--accent-danger)';
                 } else {
@@ -203,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 this.style.borderColor = 'var(--accent-primary)';
             });
         });
@@ -211,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== SCROLL REVEAL ANIMATION =====
     const revealElements = document.querySelectorAll('.section, .expertise-card, .project-card, .skill-category');
-    
+
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -219,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    }, { 
+    }, {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     });
@@ -233,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== PARALLAX EFFECT FOR SHAPES =====
     const shapes = document.querySelectorAll('.shape');
-    
+
     window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
         shapes.forEach((shape, index) => {
@@ -244,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== SMOOTH ANCHOR LINKS =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
             if (href !== '#') {
                 e.preventDefault();
@@ -265,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             // Close modals if any
         }
-        
+
         // Press '/' to focus search (if applicable)
         if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
             e.preventDefault();
@@ -276,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== LAZY LOADING IMAGES =====
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
-    
+
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -296,9 +373,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== TOOLTIP =====
     const tooltipElements = document.querySelectorAll('[data-tooltip]');
-    
+
     tooltipElements.forEach(el => {
-        el.addEventListener('mouseenter', function() {
+        el.addEventListener('mouseenter', function () {
             const tooltip = document.createElement('div');
             tooltip.className = 'tooltip';
             tooltip.textContent = this.getAttribute('data-tooltip');
@@ -321,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const rect = this.getBoundingClientRect();
             tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
             tooltip.style.top = rect.top - tooltip.offsetHeight - 8 + window.scrollY + 'px';
-            
+
             requestAnimationFrame(() => {
                 tooltip.style.opacity = '1';
             });
@@ -329,7 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this._tooltip = tooltip;
         });
 
-        el.addEventListener('mouseleave', function() {
+        el.addEventListener('mouseleave', function () {
             if (this._tooltip) {
                 this._tooltip.remove();
                 this._tooltip = null;
@@ -338,11 +415,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ===== CONSOLE EASTER EGG =====
-    console.log('%c🛡️ Nguyễn Đình Hưng - Security Intern', 
+    console.log('%c🛡️ Nguyễn Đình Hưng - Security Intern',
         'font-size: 20px; font-weight: bold; color: #00d4ff;');
-    console.log('%cSinh viên năm 3 ATTT - Đang tìm cơ hội thực tập!', 
+    console.log('%cSinh viên năm 3 ATTT - Đang tìm cơ hội thực tập!',
         'font-size: 14px; color: #a0a0b0;');
-    console.log('%c📧 dinhhungnguyen.work@gmail.com', 
+    console.log('%c📧 dinhhungnguyen.work@gmail.com',
         'font-size: 12px; color: #7c3aed;');
 });
 
