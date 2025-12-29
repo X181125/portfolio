@@ -1,135 +1,935 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Nguyễn Đình Hưng</title>
+    <title>Portfolio | Nguyễn Đình Hưng - Sinh viên An toàn Thông tin</title>
+    <meta name="description"
+        content="Portfolio của Nguyễn Đình Hưng - Sinh viên năm 3 An toàn Thông tin tại UIT, đang tìm kiếm cơ hội thực tập">
+    <meta name="keywords" content="An toàn thông tin, Cybersecurity, Python, Machine Learning, Web Security">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
+            <div class="shape shape-5"></div>
+        </div>
+    </div>
+
+    <!-- Cursor Effect -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+
     <main>
+        <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-info">
-                <figure class="avatar-box">
-                    <img src="avatar.jpg" alt="Nguyễn Đình Hưng" width="80">
-                </figure>
-                <div class="info-content">
-                    <h1 class="name" title="Nguyễn Đình Hưng">Nguyễn Đình Hưng</h1>
-                    <p class="title">Chuyên gia An toàn Thông tin</p>
+            <div class="sidebar-inner">
+                <div class="sidebar-info">
+                    <figure class="avatar-box">
+                        <div class="avatar-ring"></div>
+                        <img src="avatar.jpg" alt="Nguyễn Đình Hưng" width="120">
+                        <div class="avatar-status"></div>
+                    </figure>
+                    <div class="info-content">
+                        <h1 class="name">Nguyễn Đình Hưng</h1>
+                        <p class="title">
+                            <span class="title-icon">🛡️</span>
+                            <span class="typing-text" id="typing-title"></span>
+                            <span class="typing-cursor">|</span>
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="sidebar-info_more">
+
+                <div class="sidebar-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="5">0</span>
+                        <span class="stat-label">Dự án</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="3">0</span>
+                        <span class="stat-label">Năm học</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">7.66</span>
+                        <span class="stat-label">GPA</span>
+                    </div>
+                </div>
+
                 <div class="separator"></div>
+
                 <ul class="contacts-list">
                     <li class="contact-item">
-                        <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
+                        <div class="icon-box">
+                            <ion-icon name="mail-outline"></ion-icon>
+                        </div>
                         <div class="contact-info">
                             <p class="contact-title">Email</p>
-                            <a href="mailto:dinhhungnguyen.work@gmail.com" class="contact-link">dinhhungnguyen.work@gmail.com</a>
+                            <a href="mailto:dinhhungnguyen.work@gmail.com"
+                                class="contact-link">dinhhungnguyen.work@gmail.com</a>
                         </div>
                     </li>
                     <li class="contact-item">
-                        <div class="icon-box"><ion-icon name="phone-portrait-outline"></ion-icon></div>
+                        <div class="icon-box">
+                            <ion-icon name="phone-portrait-outline"></ion-icon>
+                        </div>
                         <div class="contact-info">
                             <p class="contact-title">Điện thoại</p>
                             <a href="tel:+84854854456" class="contact-link">+84 854-854-456</a>
                         </div>
                     </li>
                     <li class="contact-item">
-                        <div class="icon-box"><ion-icon name="location-outline"></ion-icon></div>
+                        <div class="icon-box">
+                            <ion-icon name="location-outline"></ion-icon>
+                        </div>
                         <div class="contact-info">
                             <p class="contact-title">Khu vực</p>
                             <address>TP. Hồ Chí Minh, Việt Nam</address>
                         </div>
                     </li>
+                    <li class="contact-item">
+                        <div class="icon-box">
+                            <ion-icon name="school-outline"></ion-icon>
+                        </div>
+                        <div class="contact-info">
+                            <p class="contact-title">Trường</p>
+                            <span class="contact-text">UIT - ĐHQG TPHCM</span>
+                        </div>
+                    </li>
                 </ul>
+
                 <div class="separator"></div>
+
                 <ul class="social-list">
-                    <li class="social-item"><a href="https://github.com/X181125" class="social-link" target="_blank"><ion-icon name="logo-github"></ion-icon></a></li>
-                    <li class="social-item"><a href="https://linkedin.com/in/ndh/" class="social-link" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+                    <li class="social-item">
+                        <a href="https://github.com/X181125" class="social-link" target="_blank" data-tooltip="GitHub">
+                            <ion-icon name="logo-github"></ion-icon>
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="https://linkedin.com/in/ndh" class="social-link" target="_blank"
+                            data-tooltip="LinkedIn">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
+                    </li>
+                    <li class="social-item">
+                        <a href="mailto:dinhhungnguyen.work@gmail.com" class="social-link" data-tooltip="Email">
+                            <ion-icon name="mail-outline"></ion-icon>
+                        </a>
+                    </li>
                 </ul>
+
+                <a href="#lien-he" class="sidebar-cta">
+                    <ion-icon name="chatbubble-outline"></ion-icon>
+                    <span>Liên hệ ngay</span>
+                </a>
             </div>
         </aside>
 
+        <!-- Main Content -->
         <div class="main-content">
             <div id="scroll-watcher"></div>
+
+            <!-- Navigation -->
             <nav class="navbar">
                 <ul class="navbar-list">
-                    <li class="navbar-item"><a href="#gioi-thieu" class="navbar-link active" data-nav-link>Giới Thiệu</a></li>
-                    <li class="navbar-item"><a href="#hoc-van" class="navbar-link" data-nav-link>Học Vấn</a></li>
-                    <li class="navbar-item"><a href="#du-an" class="navbar-link" data-nav-link>Dự Án</a></li>
-                    <li class="navbar-item"><a href="#lien-he" class="navbar-link" data-nav-link>Liên Hệ</a></li>
+                    <li class="navbar-item">
+                        <a href="#gioi-thieu" class="navbar-link active" data-nav-link>
+                            <ion-icon name="person-outline"></ion-icon>
+                            <span>Giới Thiệu</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#ky-nang" class="navbar-link" data-nav-link>
+                            <ion-icon name="code-slash-outline"></ion-icon>
+                            <span>Kỹ Năng</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#du-an" class="navbar-link" data-nav-link>
+                            <ion-icon name="folder-outline"></ion-icon>
+                            <span>Dự Án</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#hoc-van" class="navbar-link" data-nav-link>
+                            <ion-icon name="school-outline"></ion-icon>
+                            <span>Học Vấn</span>
+                        </a>
+                    </li>
+                    <li class="navbar-item">
+                        <a href="#lien-he" class="navbar-link" data-nav-link>
+                            <ion-icon name="paper-plane-outline"></ion-icon>
+                            <span>Liên Hệ</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
 
             <div class="content-wrapper">
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <span class="badge-dot"></span>
+                            Đang tìm cơ hội thực tập
+                        </div>
+                        <h1 class="hero-title">
+                            Xin chào, tôi là
+                            <span class="gradient-text">Đình Hưng</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            Sinh viên <strong>An toàn Thông tin</strong> với đam mê về
+                            <span class="highlight">Machine Learning</span>,
+                            <span class="highlight">Cryptography</span> và
+                            <span class="highlight">Web Security</span>
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#du-an" class="btn btn-primary">
+                                <ion-icon name="eye-outline"></ion-icon>
+                                Xem dự án
+                            </a>
+                            <a href="https://drive.google.com/drive/folders/1ALM_SBVmAyLB9_zoiq1tUD8d4NLnOw_f?usp=sharing"
+                                class="btn btn-secondary">
+                                <ion-icon name="download-outline"></ion-icon>
+                                Tải CV
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="code-window">
+                            <div class="window-header">
+                                <div class="window-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="window-title">intern_profile.py</span>
+                            </div>
+                            <pre class="code-content"><code><span class="keyword">class</span> <span class="class-name">SecurityIntern</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="param">self</span>):
+        <span class="param">self</span>.name = <span class="string">"Nguyễn Đình Hưng"</span>
+        <span class="param">self</span>.role = <span class="string">"Security Intern"</span>
+        <span class="param">self</span>.skills = [
+            <span class="string">"Python"</span>, <span class="string">"C++"</span>,
+            <span class="string">"Machine Learning"</span>,
+            <span class="string">"Cryptography"</span>,
+            <span class="string">"Web Security"</span>
+        ]
+    
+    <span class="keyword">def</span> <span class="function">analyze_vulnerability</span>(<span class="param">self</span>, code):
+        <span class="comment"># AI-powered detection</span>
+        <span class="keyword">return</span> <span class="param">self</span>.model.predict(code)</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- About Section -->
                 <article id="gioi-thieu" class="section">
-                    <header><h2 class="h2 article-title">Giới Thiệu</h2></header>
-                    <section class="about-text">
-                        <p>Tôi là sinh viên năm ba ngành An toàn Thông tin với nền tảng cơ bản về bảo mật hệ thống, mật mã học ứng dụng và lập trình đa ngôn ngữ (Python, C++, Javascript). Tôi có kinh nghiệm thực tiễn trong việc triển khai các giải pháp bảo mật ở mức cơ bản và phát triển các ứng dụng full-stack đơng giản.</p>
-                        <p>Tôi đang tìm kiếm cơ hội thực tập trong lĩnh vực An toàn thông tin để áp dụng các kỹ năng phân tích và giải quyết vấn đề của mình nhằm góp phần xây dựng và bảo vệ các hệ thống an toàn. Tôi là một người ham học hỏi, có khả năng làm việc độc lập trong các dự án và luôn hướng tới việc tạo ra các sản phẩm công nghệ đáng tin cậy.</p>
-                    </section>
-                    <section class="service">
-                        <h3 class="h3 service-title">Chuyên môn chính</h3>
-                        <ul class="service-list">
-                            <li class="service-item"><div class="service-icon-box"><img src="https://placehold.co/40x40/1e293b/a78bfa?text=🛡️" alt="Applied Cryptography icon"></div><div class="service-content-box"><h4 class="h4 service-item-title">Mật mã học Ứng dụng</h4><p class="service-item-text">Thiết kế và triển khai các hệ thống mã hóa hybrid (AES, RSA) để bảo vệ dữ liệu.</p></div></li>
-                            <li class="service-item"><div class="service-icon-box"><img src="https://placehold.co/40x40/1e293b/a78bfa?text=🌐" alt="Web Security icon"></div><div class="service-content-box"><h4 class="h4 service-item-title">Bảo mật Web</h4><p class="service-item-text">Phân tích và phòng chống các lỗ hổng phổ biến như SQL Injection, XSS trong ứng dụng web.</p></div></li>
-                            <li class="service-item"><div class="service-icon-box"><img src="https://placehold.co/40x40/1e293b/a78bfa?text=⚙️" alt="System Development icon"></div><div class="service-content-box"><h4 class="h4 service-item-title">Phát triển Hệ thống</h4><p class="service-item-text">Xây dựng ứng dụng full-stack và desktop với các công nghệ như Django, .NET, và Web Sockets.</p></div></li>
-                            <li class="service-item"><div class="service-icon-box"><img src="https://placehold.co/40x40/1e293b/a78bfa?text=🖥️" alt="Network Security icon"></div><div class="service-content-box"><h4 class="h4 service-item-title">An ninh Mạng</h4><p class="service-item-text">Sử dụng các công cụ giám sát và phân tích mạng để đảm bảo an toàn cho hệ thống.</p></div></li>
-                        </ul>
-                    </section>
+                    <header class="section-header">
+                        <span class="section-tag">Về tôi</span>
+                        <h2 class="section-title">Giới Thiệu</h2>
+                    </header>
+
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>
+                                Tôi là sinh viên năm ba ngành <strong>An toàn Thông tin</strong> tại
+                                <strong>Đại học Công nghệ Thông tin - ĐHQG TPHCM</strong>. Với nền tảng
+                                vững chắc về bảo mật hệ thống, mật mã học ứng dụng và lập trình đa ngôn ngữ
+                                (Python, C++, JavaScript), tôi đang tập trung nghiên cứu ứng dụng
+                                <em>Machine Learning trong An ninh mạng</em>.
+                            </p>
+                            <p>
+                                Tôi có kinh nghiệm thực tiễn trong việc xây dựng các công cụ phát hiện
+                                lỗ hổng tự động, khai thác SQL Injection bằng AI, và phát triển hệ thống
+                                mã hóa video streaming. Hiện tại, tôi đang tìm kiếm cơ hội thực tập để
+                                áp dụng các kỹ năng nghiên cứu và phát triển của mình.
+                            </p>
+                        </div>
+
+                        <div class="about-highlights">
+                            <div class="highlight-card">
+                                <div class="highlight-icon">🎯</div>
+                                <h4>Mục tiêu</h4>
+                                <p>Security Intern / SOC Analyst Intern</p>
+                            </div>
+                            <div class="highlight-card">
+                                <div class="highlight-icon">🔬</div>
+                                <h4>Quan tâm</h4>
+                                <p>Web Security, ML in Cybersecurity</p>
+                            </div>
+                            <div class="highlight-card">
+                                <div class="highlight-icon">💡</div>
+                                <h4>Đam mê</h4>
+                                <p>CTF, Bug Bounty, Open Source</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Services/Expertise -->
+                    <div class="expertise-section">
+                        <h3 class="subsection-title">
+                            <ion-icon name="shield-checkmark-outline"></ion-icon>
+                            Chuyên môn chính
+                        </h3>
+                        <div class="expertise-grid">
+                            <div class="expertise-card">
+                                <div class="card-glow"></div>
+                                <div class="expertise-icon">
+                                    <ion-icon name="lock-closed-outline"></ion-icon>
+                                </div>
+                                <h4>Mật mã học Ứng dụng</h4>
+                                <p>Thiết kế và triển khai hệ thống mã hóa hybrid (AES-256, RSA-2048) cho video streaming
+                                    và bảo vệ dữ liệu.</p>
+                                <div class="expertise-tags">
+                                    <span class="tag">AES</span>
+                                    <span class="tag">RSA</span>
+                                    <span class="tag">Hybrid</span>
+                                </div>
+                            </div>
+
+                            <div class="expertise-card">
+                                <div class="card-glow"></div>
+                                <div class="expertise-icon">
+                                    <ion-icon name="bug-outline"></ion-icon>
+                                </div>
+                                <h4>Bảo mật Web & Pentest</h4>
+                                <p>Phân tích và khai thác các lỗ hổng OWASP Top 10: SQL Injection, XSS, CSRF,
+                                    Authentication Bypass.</p>
+                                <div class="expertise-tags">
+                                    <span class="tag">SQLi</span>
+                                    <span class="tag">XSS</span>
+                                    <span class="tag">OWASP</span>
+                                </div>
+                            </div>
+
+                            <div class="expertise-card">
+                                <div class="card-glow"></div>
+                                <div class="expertise-icon">
+                                    <ion-icon name="hardware-chip-outline"></ion-icon>
+                                </div>
+                                <h4>ML for Security</h4>
+                                <p>Ứng dụng Deep Learning (Graph Transformer, GRU) để phát hiện lỗ hổng mã nguồn và tự
+                                    động hóa pentest.</p>
+                                <div class="expertise-tags">
+                                    <span class="tag">PyTorch</span>
+                                    <span class="tag">TensorFlow</span>
+                                    <span class="tag">GNN</span>
+                                </div>
+                            </div>
+
+                            <div class="expertise-card">
+                                <div class="card-glow"></div>
+                                <div class="expertise-icon">
+                                    <ion-icon name="terminal-outline"></ion-icon>
+                                </div>
+                                <h4>Phát triển Hệ thống</h4>
+                                <p>Xây dựng ứng dụng full-stack với Django, Flask, .NET và desktop app với C#, PyQt.</p>
+                                <div class="expertise-tags">
+                                    <span class="tag">Django</span>
+                                    <span class="tag">.NET</span>
+                                    <span class="tag">Flask</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
 
-                <article id="hoc-van" class="section">
-                    <header><h2 class="h2 article-title">Học Vấn & Kỹ Năng</h2></header>
-                    <section class="timeline">
-                        <div class="title-wrapper"><div class="icon-box"><ion-icon name="book-outline"></ion-icon></div><h3 class="h3">Học vấn</h3></div>
-                        <ol class="timeline-list">
-                            <li class="timeline-item"><h4 class="h4 timeline-item-title">Đại học Công nghệ Thông tin - ĐHQG TPHCM</h4><span>2023 — 2026 (Dự kiến)</span><p class="timeline-text">Chuyên ngành: An toàn Thông tin | GPA: 7.66/10</p></li>
-                        </ol>
-                    </section>
-                    <section class="skill">
-                        <h3 class="h3 skills-title">Kỹ năng</h3>
-                        <ul class="skills-list content-card">
-                            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Python, C/C++, C#</h5><data value="80">80%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 80%;"></div></div></li>
-                            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Mật mã & Bảo mật Web</h5><data value="85">85%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 85%;"></div></div></li>
-                            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">Flask, Django, .NET</h5><data value="75">75%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 75%;"></div></div></li>
-                            <li class="skills-item"><div class="title-wrapper"><h5 class="h5">SQL, Javascript, HTML/CSS</h5><data value="90">90%</data></div><div class="skill-progress-bg"><div class="skill-progress-fill" style="width: 90%;"></div></div></li>
-                        </ul>
-                    </section>
+                <!-- Skills Section -->
+                <article id="ky-nang" class="section">
+                    <header class="section-header">
+                        <span class="section-tag">Tech Stack</span>
+                        <h2 class="section-title">Kỹ Năng & Công Nghệ</h2>
+                    </header>
+
+                    <div class="skills-container">
+                        <!-- Programming Languages -->
+                        <div class="skill-category">
+                            <h3 class="category-title">
+                                <ion-icon name="code-outline"></ion-icon>
+                                Ngôn ngữ lập trình
+                            </h3>
+                            <div class="lang-tags">
+                                <div class="lang-item">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                        alt="Python">
+                                    <span>Python</span>
+                                </div>
+                                <div class="lang-item">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg"
+                                        alt="C">
+                                    <span>C/C++</span>
+                                </div>
+                                <div class="lang-item">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                        alt="JavaScript">
+                                    <span>JavaScript</span>
+                                </div>
+                                <div class="lang-item">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
+                                        alt="C#">
+                                    <span>C#</span>
+                                </div>
+                                <div class="lang-item">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                                        alt="HTML5">
+                                    <span>HTML/CSS</span>
+                                </div>
+                                <div class="lang-item">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                        alt="SQL">
+                                    <span>SQL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Skills -->
+                        <div class="skill-category">
+                            <h3 class="category-title">
+                                <ion-icon name="shield-outline"></ion-icon>
+                                An ninh mạng
+                            </h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag advanced">Web Penetration Testing</span>
+                                <span class="skill-tag advanced">SQL Injection</span>
+                                <span class="skill-tag intermediate">XSS & CSRF</span>
+                                <span class="skill-tag advanced">Cryptography</span>
+                                <span class="skill-tag intermediate">Network Security</span>
+                                <span class="skill-tag beginner">Reverse Engineering</span>
+                                <span class="skill-tag intermediate">OWASP Top 10</span>
+                                <span class="skill-tag beginner">Malware Analysis</span>
+                            </div>
+                        </div>
+
+                        <!-- Frameworks & Tools -->
+                        <div class="skill-category">
+                            <h3 class="category-title">
+                                <ion-icon name="construct-outline"></ion-icon>
+                                Frameworks & Tools
+                            </h3>
+                            <div class="tech-grid">
+                                <div class="tech-item" data-tooltip="Machine Learning">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg"
+                                        alt="PyTorch">
+                                    <span>PyTorch</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="Deep Learning">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg"
+                                        alt="TensorFlow">
+                                    <span>TensorFlow</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="Web Framework">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg"
+                                        alt="Django">
+                                    <span>Django</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="Web Framework">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg"
+                                        alt="Flask">
+                                    <span>Flask</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="Version Control">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                                        alt="Git">
+                                    <span>Git</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="Container">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                        alt="Docker">
+                                    <span>Docker</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="Database">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                                        alt="MySQL">
+                                    <span>MySQL</span>
+                                </div>
+                                <div class="tech-item" data-tooltip="OS">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg"
+                                        alt="Linux">
+                                    <span>Linux</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
 
+                <!-- Projects Section -->
                 <article id="du-an" class="section">
-                    <header><h2 class="h2 article-title">Dự Án</h2></header>
-                    <section class="projects">
-                        <ul class="project-list">
-                            <li class="project-item"><a href="https://github.com/X181125/Cryptography_project.git" target="_blank"><figure class="project-img"><div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div><img src="https://placehold.co/400x300/1e293b/ffffff?text=Secure+Video" alt="Secure Video Streaming" loading="lazy"></figure><h3 class="project-title">Hệ thống Streaming Video Bảo mật</h3><p class="project-category">Bảo mật</p></a></li>
-                            <li class="project-item"><a href="https://github.com/Hung-23520564/auction_web.git" target="_blank"><figure class="project-img"><div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div><img src="https://placehold.co/400x300/1e293b/ffffff?text=Online+Auction" alt="Online Auction Web" loading="lazy"></figure><h3 class="project-title">Website Đấu giá Trực tuyến</h3><p class="project-category">Full-stack</p></a></li>
-                            <li class="project-item"><a href="https://github.com/Hung-23520564/Internet_Cafe_Manager_App.git" target="_blank"><figure class="project-img"><div class="project-item-icon-box"><ion-icon name="eye-outline"></ion-icon></div><img src="https://placehold.co/400x300/1e293b/ffffff?text=Cafe+Manager" alt="Internet Café Manager App" loading="lazy"></figure><h3 class="project-title">Ứng dụng Quản lý Quán Internet</h3><p class="project-category">Desktop App</p></a></li>
-                        </ul>
-                    </section>
+                    <header class="section-header">
+                        <span class="section-tag">Portfolio</span>
+                        <h2 class="section-title">Dự Án Nổi Bật</h2>
+                    </header>
+
+                    <!-- Project Filters -->
+                    <div class="project-filters">
+                        <button class="filter-btn active" data-filter="all">Tất cả</button>
+                        <button class="filter-btn" data-filter="ai">AI/ML</button>
+                        <button class="filter-btn" data-filter="security">Security</button>
+                        <button class="filter-btn" data-filter="fullstack">Full-stack</button>
+                    </div>
+
+                    <div class="projects-grid">
+                        <!-- Project 1: Auto Bug Detection -->
+                        <article class="project-card featured" data-category="ai security">
+                            <div class="project-badge">⭐ Nổi bật</div>
+                            <div class="project-image">
+                                <div class="project-overlay">
+                                    <a href="https://github.com/X181125/Auto_Bug_Detection" target="_blank"
+                                        class="project-link">
+                                        <ion-icon name="open-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="project-visual ai-visual">
+                                    <div class="neural-network">
+                                        <div class="node n1"></div>
+                                        <div class="node n2"></div>
+                                        <div class="node n3"></div>
+                                        <div class="node n4"></div>
+                                        <div class="node n5"></div>
+                                        <div class="node n6"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <span class="project-category">AI/ML • Security</span>
+                                    <div class="project-stats">
+                                        <span><ion-icon name="star-outline"></ion-icon> Graph Transformer</span>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">Auto Bug Detection</h3>
+                                <p class="project-description">
+                                    Hệ thống phát hiện lỗ hổng bảo mật tự động trong mã nguồn C/C++ sử dụng
+                                    <strong>Graph Transformer</strong>. Mô hình học từ 2 view: AST (Abstract Syntax
+                                    Tree)
+                                    và CDFG (Control Data Flow Graph) để phát hiện các pattern nguy hiểm.
+                                </p>
+                                <div class="project-features">
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Dual-view Learning (AST + CDFG)</span>
+                                    </div>
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>4-layer Graph Transformer</span>
+                                    </div>
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Multi-head Attention + Edge-type Bias</span>
+                                    </div>
+                                </div>
+                                <div class="project-tech">
+                                    <span class="tech">Python</span>
+                                    <span class="tech">PyTorch</span>
+                                    <span class="tech">Graph Neural Network</span>
+                                    <span class="tech">Word2Vec</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="https://github.com/X181125/Auto_Bug_Detection" target="_blank"
+                                        class="btn-project">
+                                        <ion-icon name="logo-github"></ion-icon>
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project 2: GRU Blind SQLi -->
+                        <article class="project-card featured" data-category="ai security">
+                            <div class="project-badge">⭐ Nổi bật</div>
+                            <div class="project-image">
+                                <div class="project-overlay">
+                                    <a href="https://github.com/X181125/GRU_Model_Method_For_Blind_SQLi" target="_blank"
+                                        class="project-link">
+                                        <ion-icon name="open-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="project-visual sqli-visual">
+                                    <div class="terminal-mock">
+                                        <div class="terminal-line">
+                                            <span class="prompt">$</span>
+                                            <span class="command">python exploit.py</span>
+                                        </div>
+                                        <div class="terminal-line">
+                                            <span class="output">[+] Generating table names...</span>
+                                        </div>
+                                        <div class="terminal-line">
+                                            <span class="output success">[✓] Found: users (4.12s)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <span class="project-category">AI/ML • Pentest</span>
+                                    <div class="project-stats">
+                                        <span><ion-icon name="analytics-outline"></ion-icon> Perplexity: 5.99</span>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">GRU Model for Blind SQLi</h3>
+                                <p class="project-description">
+                                    Mô hình <strong>GRU (Gated Recurrent Unit)</strong> sinh tên bảng/cột để hỗ trợ
+                                    khai thác <em>time-based blind SQL Injection</em>. Dựa trên paper nghiên cứu,
+                                    model đạt accuracy 48.76% và top-5 accuracy 80.56%.
+                                </p>
+                                <div class="project-features">
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Character-level GRU 512 units</span>
+                                    </div>
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Temperature sampling + Top-k</span>
+                                    </div>
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Time-based payload generator</span>
+                                    </div>
+                                </div>
+                                <div class="project-tech">
+                                    <span class="tech">Python</span>
+                                    <span class="tech">TensorFlow</span>
+                                    <span class="tech">Keras</span>
+                                    <span class="tech">SQLi</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="https://github.com/X181125/GRU_Model_Method_For_Blind_SQLi" target="_blank"
+                                        class="btn-project">
+                                        <ion-icon name="logo-github"></ion-icon>
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project 3: Secure Video Streaming -->
+                        <article class="project-card" data-category="security">
+                            <div class="project-image">
+                                <div class="project-overlay">
+                                    <a href="https://github.com/X181125/Cryptography_project.git" target="_blank"
+                                        class="project-link">
+                                        <ion-icon name="open-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="project-visual crypto-visual">
+                                    <div class="lock-animation">
+                                        <div class="lock-body">
+                                            <div class="lock-shackle"></div>
+                                        </div>
+                                        <div class="encryption-bits">
+                                            <span>AES</span>
+                                            <span>RSA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <span class="project-category">Cryptography</span>
+                                </div>
+                                <h3 class="project-title">Secure Video Streaming</h3>
+                                <p class="project-description">
+                                    Hệ thống streaming video bảo mật sử dụng thuật toán mã hóa lai
+                                    <strong>AES-256 + RSA-2048</strong>. Video được mã hóa real-time trước khi truyền.
+                                </p>
+                                <div class="project-tech">
+                                    <span class="tech">Python</span>
+                                    <span class="tech">AES-256</span>
+                                    <span class="tech">RSA</span>
+                                    <span class="tech">WebSocket</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="https://github.com/X181125/Cryptography_project.git" target="_blank"
+                                        class="btn-project">
+                                        <ion-icon name="logo-github"></ion-icon>
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project 4: Online Auction -->
+                        <article class="project-card" data-category="fullstack">
+                            <div class="project-image">
+                                <div class="project-overlay">
+                                    <a href="https://github.com/Hung-23520564/auction_web.git" target="_blank"
+                                        class="project-link">
+                                        <ion-icon name="open-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="project-visual web-visual">
+                                    <div class="browser-mock">
+                                        <div class="browser-bar">
+                                            <div class="bar-dots">
+                                                <span></span><span></span><span></span>
+                                            </div>
+                                            <div class="url-bar">auction-web.com</div>
+                                        </div>
+                                        <div class="browser-content">
+                                            <div class="auction-icon">🏷️</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <span class="project-category">Full-stack</span>
+                                </div>
+                                <h3 class="project-title">Website Đấu giá Trực tuyến</h3>
+                                <p class="project-description">
+                                    Nền tảng đấu giá trực tuyến với realtime bidding, hệ thống xác thực
+                                    và thanh toán an toàn. Hỗ trợ đa người dùng đồng thời.
+                                </p>
+                                <div class="project-tech">
+                                    <span class="tech">Django</span>
+                                    <span class="tech">JavaScript</span>
+                                    <span class="tech">WebSocket</span>
+                                    <span class="tech">PostgreSQL</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="https://github.com/Hung-23520564/auction_web.git" target="_blank"
+                                        class="btn-project">
+                                        <ion-icon name="logo-github"></ion-icon>
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project 5: Internet Cafe Manager -->
+                        <article class="project-card" data-category="fullstack">
+                            <div class="project-image">
+                                <div class="project-overlay">
+                                    <a href="https://github.com/Hung-23520564/Internet_Cafe_Manager_App "
+                                        target="_blank" class="project-link">
+                                        <ion-icon name="open-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="project-visual desktop-visual">
+                                    <div class="desktop-icon">
+                                        <ion-icon name="desktop-outline"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <span class="project-category">Desktop App</span>
+                                </div>
+                                <h3 class="project-title">Internet Café Manager</h3>
+                                <p class="project-description">
+                                    Ứng dụng desktop quản lý quán internet với tính năng quản lý máy,
+                                    tính tiền tự động, quản lý khách hàng và báo cáo doanh thu.
+                                </p>
+                                <div class="project-tech">
+                                    <span class="tech">C#</span>
+                                    <span class="tech">.NET</span>
+                                    <span class="tech">SQL Server</span>
+                                    <span class="tech">WinForms</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="https://github.com/Hung-23520564/Internet_Cafe_Manager_App.git"
+                                        target="_blank" class="btn-project">
+                                        <ion-icon name="logo-github"></ion-icon>
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
                 </article>
 
-                <article id="lien-he" class="section">
-                    <header><h2 class="h2 article-title">Liên Hệ</h2></header>
-                    <section class="contact-form">
-                        <h3 class="h3 form-title">Form Liên Hệ</h3>
-                        <form action="#" class="form" data-form>
-                            <div class="input-wrapper"><input type="text" name="fullname" class="form-input" placeholder="Họ và tên" required data-form-input><input type="email" name="email" class="form-input" placeholder="Địa chỉ email" required data-form-input></div>
-                            <textarea name="message" class="form-input" placeholder="Tin nhắn của bạn" required data-form-input></textarea>
-                            <button class="form-btn" type="submit" disabled data-form-btn><ion-icon name="paper-plane"></ion-icon><span>Gửi Tin Nhắn</span></button>
-                        </form>
-                    </section>
+                <!-- Education Section -->
+                <article id="hoc-van" class="section">
+                    <header class="section-header">
+                        <span class="section-tag">Background</span>
+                        <h2 class="section-title">Học Vấn & Chứng Chỉ</h2>
+                    </header>
+
+                    <div class="education-container">
+                        <div class="education-card main-education">
+                            <div class="edu-icon">
+                                <ion-icon name="school"></ion-icon>
+                            </div>
+                            <div class="edu-content">
+                                <div class="edu-header">
+                                    <h3>Đại học Công nghệ Thông tin</h3>
+                                    <span class="edu-badge">Đang học</span>
+                                </div>
+                                <p class="edu-school">ĐHQG TP. Hồ Chí Minh (UIT)</p>
+                                <p class="edu-major">Chuyên ngành: <strong>An toàn Thông tin</strong></p>
+                                <div class="edu-details">
+                                    <div class="detail">
+                                        <ion-icon name="calendar-outline"></ion-icon>
+                                        <span>2023 - 2026 (Dự kiến)</span>
+                                    </div>
+                                    <div class="detail">
+                                        <ion-icon name="trophy-outline"></ion-icon>
+                                        <span>GPA: 7.66/10</span>
+                                    </div>
+                                </div>
+                                <div class="edu-courses">
+                                    <h4>Môn học tiêu biểu:</h4>
+                                    <div class="course-tags">
+                                        <span>Mật mã học</span>
+                                        <span>An ninh mạng</span>
+                                        <span>Pentest</span>
+                                        <span>Reverse Engineering</span>
+                                        <span>Machine Learning</span>
+                                        <span>Lập trình hệ thống</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="certifications">
+                            <h3 class="cert-title">
+                                <ion-icon name="ribbon-outline"></ion-icon>
+                                Chứng chỉ & Khóa học
+                            </h3>
+                            <div class="cert-grid">
+                                <div class="cert-card">
+                                    <div class="cert-icon">📜</div>
+                                    <div class="cert-info">
+                                        <h4>Python for Cybersecurity</h4>
+                                        <p>Coursera</p>
+                                    </div>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-icon">📜</div>
+                                    <div class="cert-info">
+                                        <h4>Web Security Fundamentals</h4>
+                                        <p>PortSwigger Academy</p>
+                                    </div>
+                                </div>
+                                <div class="cert-card">
+                                    <div class="cert-icon">📜</div>
+                                    <div class="cert-info">
+                                        <h4>Deep Learning Specialization</h4>
+                                        <p>Coursera - Andrew Ng</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </article>
+
+                <!-- Contact Section -->
+                <article id="lien-he" class="section">
+                    <header class="section-header">
+                        <span class="section-tag">Kết nối</span>
+                        <h2 class="section-title">Liên Hệ</h2>
+                    </header>
+
+                    <div class="contact-container">
+                        <div class="contact-info-cards">
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <ion-icon name="mail"></ion-icon>
+                                </div>
+                                <h4>Email</h4>
+                                <a href="mailto:dinhhungnguyen.work@gmail.com">dinhhungnguyen.work@gmail.com</a>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <ion-icon name="call"></ion-icon>
+                                </div>
+                                <h4>Điện thoại</h4>
+                                <a href="tel:+84854854456">+84 854-854-456</a>
+                            </div>
+                            <div class="contact-card">
+                                <div class="contact-icon">
+                                    <ion-icon name="location"></ion-icon>
+                                </div>
+                                <h4>Địa điểm</h4>
+                                <p>TP. Hồ Chí Minh, Việt Nam</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-wrapper">
+                            <h3 class="form-title">
+                                <ion-icon name="chatbubbles-outline"></ion-icon>
+                                Gửi tin nhắn
+                            </h3>
+                            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form"
+                                id="contact-form">
+                                <!-- Web3Forms Access Key - Lấy key miễn phí tại https://web3forms.com/ -->
+                                <input type="hidden" name="access_key" value="195abc19-1067-4a62-8320-e5357c63275e">
+                                <!-- Email nhận thông báo -->
+                                <input type="hidden" name="to_email" value="dinhhungnguyen.work@gmail.com">
+                                <!-- Tiêu đề email -->
+                                <input type="hidden" name="subject" value="Tin nhắn mới từ Portfolio Website">
+                                <!-- Redirect sau khi gửi (optional) -->
+                                <input type="hidden" name="redirect" value="https://web3forms.com/success">
+                                <!-- Chống spam -->
+                                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="name">Họ và tên</label>
+                                        <input type="text" id="name" name="name" placeholder="Nhập họ tên của bạn"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" placeholder="email@example.com"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject_input">Chủ đề</label>
+                                    <input type="text" id="subject_input" name="subject_input"
+                                        placeholder="Chủ đề tin nhắn">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Tin nhắn</label>
+                                    <textarea id="message" name="message" rows="5" placeholder="Nội dung tin nhắn..."
+                                        required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">
+                                    <ion-icon name="send"></ion-icon>
+                                    <span>Gửi tin nhắn</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Footer -->
+                <footer class="footer">
+                    <div class="footer-content">
+                        <p>&copy; 2025 Nguyễn Đình Hưng. All rights reserved.</p>
+                        <div class="footer-links">
+                            <a href="https://github.com/X181125" target="_blank">
+                                <ion-icon name="logo-github"></ion-icon>
+                            </a>
+                            <a href="https://linkedin.com/in/ndh" target="_blank">
+                                <ion-icon name="logo-linkedin"></ion-icon>
+                            </a>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </main>
+
+    <!-- Scripts -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
