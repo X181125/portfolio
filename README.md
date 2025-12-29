@@ -95,7 +95,8 @@ MIT License - Feel free to use and modify!
 
 - **Email**: dinhhungnguyen.work@gmail.com
 - **GitHub**: [@X181125](https://github.com/X181125)
-- **LinkedIn**: [Nguyễn Đình Hưng](https://linkedin.com/in/ndh)
+- **LinkedIn**: [Nguyễn Đình Hưng](https://www.linkedin.com/in/hưng-nguyễn-đình-569216333
+)
 
 ---
 
