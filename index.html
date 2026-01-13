@@ -56,7 +56,7 @@
 
                 <div class="sidebar-stats">
                     <div class="stat-item">
-                        <span class="stat-number" data-count="5">0</span>
+                        <span class="stat-number" data-count="6">0</span>
                         <span class="stat-label">Dự án</span>
                     </div>
                     <div class="stat-item">
@@ -194,8 +194,8 @@
                         </h1>
                         <p class="hero-subtitle">
                             Sinh viên <strong>An toàn Thông tin</strong> với đam mê về
-                            <span class="highlight">Machine Learning</span>,
-                            <span class="highlight">Cryptography</span> và
+                            <span class="highlight">LLM/AI Agent</span>,
+                            <span class="highlight">Machine Learning</span> và
                             <span class="highlight">Web Security</span>
                         </p>
                         <div class="hero-buttons">
@@ -225,10 +225,10 @@
         <span class="param">self</span>.name = <span class="string">"Nguyễn Đình Hưng"</span>
         <span class="param">self</span>.role = <span class="string">"Security Intern"</span>
         <span class="param">self</span>.skills = [
-            <span class="string">"Python"</span>, <span class="string">"C++"</span>,
+            <span class="string">"Python"</span>, <span class="string">"LLM Agent"</span>,
             <span class="string">"Machine Learning"</span>,
-            <span class="string">"Cryptography"</span>,
-            <span class="string">"Web Security"</span>
+            <span class="string">"Web Security"</span>,
+            <span class="string">"Cryptography"</span>
         ]
     
     <span class="keyword">def</span> <span class="function">analyze_vulnerability</span>(<span class="param">self</span>, code):
@@ -252,13 +252,13 @@
                                 <strong>Đại học Công nghệ Thông tin - ĐHQG TPHCM</strong>. Với nền tảng
                                 vững chắc về bảo mật hệ thống, mật mã học ứng dụng và lập trình đa ngôn ngữ
                                 (Python, C++, JavaScript), tôi đang tập trung nghiên cứu ứng dụng
-                                <em>Machine Learning trong An ninh mạng</em>.
+                                <em>AI/ML và LLM trong An ninh mạng</em>.
                             </p>
                             <p>
-                                Tôi có kinh nghiệm thực tiễn trong việc xây dựng các công cụ phát hiện
-                                lỗ hổng tự động, khai thác SQL Injection bằng AI, và phát triển hệ thống
-                                mã hóa video streaming. Hiện tại, tôi đang tìm kiếm cơ hội thực tập để
-                                áp dụng các kỹ năng nghiên cứu và phát triển của mình.
+                                Tôi có kinh nghiệm thực tiễn trong việc xây dựng <strong>LLM Agent tự động hóa pentest</strong>,
+                                phát triển công cụ phát hiện lỗ hổng bằng Graph Neural Network, khai thác Blind SQL Injection 
+                                bằng Deep Learning, và triển khai hệ thống mã hóa video streaming. Hiện tại, tôi đang 
+                                tìm kiếm cơ hội thực tập để áp dụng các kỹ năng nghiên cứu và phát triển của mình.
                             </p>
                         </div>
 
@@ -271,7 +271,7 @@
                             <div class="highlight-card">
                                 <div class="highlight-icon">🔬</div>
                                 <h4>Quan tâm</h4>
-                                <p>Web Security, ML in Cybersecurity</p>
+                                <p>LLM Agent, Web Security, ML in Cybersecurity</p>
                             </div>
                             <div class="highlight-card">
                                 <div class="highlight-icon">💡</div>
@@ -484,7 +484,77 @@
                     </div>
 
                     <div class="projects-grid">
-                        <!-- Project 1: Auto Bug Detection -->
+
+                        <!-- Project 1: Auto Pentest Using LLM -->
+                        <article class="project-card featured" data-category="ai security fullstack">
+                            <div class="project-badge">🔥 Mới nhất</div>
+                            <div class="project-image">
+                                <div class="project-overlay">
+                                    <a href="https://github.com/tranquanghuyuit/AutoPentest-Project" target="_blank"
+                                        class="project-link">
+                                        <ion-icon name="open-outline"></ion-icon>
+                                    </a>
+                                </div>
+                                <div class="project-visual ai-visual">
+                                    <div class="terminal-mock">
+                                        <div class="terminal-line">
+                                            <span class="prompt">🤖</span>
+                                            <span class="command">LLM Agent Analyzing...</span>
+                                        </div>
+                                        <div class="terminal-line">
+                                            <span class="output">[+] Found SQLi in /login</span>
+                                        </div>
+                                        <div class="terminal-line">
+                                            <span class="output success">[✓] Auto exploiting...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-content">
+                                <div class="project-header">
+                                    <span class="project-category">AI/ML • Security • Full-stack</span>
+                                    <div class="project-stats">
+                                        <span><ion-icon name="flash-outline"></ion-icon> LLM-Powered</span>
+                                    </div>
+                                </div>
+                                <h3 class="project-title">Auto Pentest Using LLM</h3>
+                                <p class="project-description">
+                                    Nền tảng tự động hóa pentest thông minh sử dụng
+                                    <strong>Large Language Model (LLM)</strong> để tự động phân tích, phát hiện và khai thác lỗ hổng
+                                    bảo mật web. LLM Agent có khả năng reasoning, lập kế hoạch tấn công và thực thi payload tự động.
+                                </p>
+                                <div class="project-features">
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>LLM Agent với ReAct reasoning</span>
+                                    </div>
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Tự động phát hiện & khai thác SQLi, XSS</span>
+                                    </div>
+                                    <div class="feature">
+                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                        <span>Giao diện web đa người dùng</span>
+                                    </div>
+                                </div>
+                                <div class="project-tech">
+                                    <span class="tech">Python</span>
+                                    <span class="tech">LangChain</span>
+                                    <span class="tech">LLM Agent</span>
+                                    <span class="tech">Flask</span>
+                                    <span class="tech">Web Security</span>
+                                </div>
+                                <div class="project-actions">
+                                    <a href="https://github.com/tranquanghuyuit/AutoPentest-Project" target="_blank"
+                                        class="btn-project">
+                                        <ion-icon name="logo-github"></ion-icon>
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project 2: Auto Bug Detection -->
                         <article class="project-card featured" data-category="ai security">
                             <div class="project-badge">⭐ Nổi bật</div>
                             <div class="project-image">
@@ -549,7 +619,7 @@
                             </div>
                         </article>
 
-                        <!-- Project 2: GRU Blind SQLi -->
+                        <!-- Project 3: GRU Blind SQLi -->
                         <article class="project-card featured" data-category="ai security">
                             <div class="project-badge">⭐ Nổi bật</div>
                             <div class="project-image">
@@ -617,7 +687,7 @@
                             </div>
                         </article>
 
-                        <!-- Project 3: Secure Video Streaming -->
+                        <!-- Project 4: Secure Video Streaming -->
                         <article class="project-card" data-category="security">
                             <div class="project-image">
                                 <div class="project-overlay">
@@ -663,7 +733,7 @@
                             </div>
                         </article>
 
-                        <!-- Project 4: Online Auction -->
+                        <!-- Project 5: Online Auction -->
                         <article class="project-card" data-category="fullstack">
                             <div class="project-image">
                                 <div class="project-overlay">
@@ -711,7 +781,7 @@
                             </div>
                         </article>
 
-                        <!-- Project 5: Internet Cafe Manager -->
+                        <!-- Project 6: Internet Cafe Manager -->
                         <article class="project-card" data-category="fullstack">
                             <div class="project-image">
                                 <div class="project-overlay">
@@ -883,7 +953,6 @@
                 <!-- Footer -->
                 <footer class="footer">
                     <div class="footer-content">
-                        <p>&copy; 2025 Nguyễn Đình Hưng. All rights reserved.</p>
                         <div class="footer-links">
                             <a href="https://github.com/X181125" target="_blank">
                                 <ion-icon name="logo-github"></ion-icon>
