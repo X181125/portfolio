@@ -1,70 +1,91 @@
-import { ArrowUpRight, ExternalLink, GitBranch, Layers3 } from "lucide-react";
+import { Code2, GitBranch, Github, Monitor, Radio, type LucideIcon } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/src/data/portfolio_data";
-import { Reveal } from "./Reveal";
-import { SectionHeading } from "./SectionHeading";
+
+const projectIcons: Partial<Record<string, LucideIcon>> = {
+  "real-time-auction": Radio,
+  "internet-cafe-manager": Monitor,
+  "agent-research": GitBranch,
+};
+
+function TechnologyList({ items }: { items: readonly string[] }) {
+  return (
+    <ul className="tech-list" aria-label="Technologies">
+      {items.map((item) => <li key={item}>{item}</li>)}
+    </ul>
+  );
+}
+
+function RepositoryLink({ href, title }: { href: string; title: string }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="repo-link" aria-label={`GitHub repository for ${title}`}>
+      <Github size={17} aria-hidden="true" />
+      View on GitHub
+    </a>
+  );
+}
 
 export function ProjectsGallery() {
+  const [featured, ...moreProjects] = PORTFOLIO_DATA.projects;
+
   return (
-    <section id="projects" className="anchor-target border-t border-ink-700 px-5 py-24 sm:px-8 sm:py-32 lg:px-10">
-      <div className="mx-auto max-w-6xl">
-        <Reveal>
-          <div className="flex flex-col justify-between gap-7 sm:flex-row sm:items-end">
-            <SectionHeading
-              eyebrow="05 / Selected work"
-              title="Systems with a point of view."
-              description="Four projects exploring how security engineering, machine intelligence, and practical product development can reinforce one another."
-            />
-            <p className="max-w-xs font-mono text-[0.65rem] uppercase leading-6 tracking-[0.16em] text-ink-500 sm:text-right">
-              Built for clarity<br />
-              designed for inspection
-            </p>
+    <section id="projects" className="section-band anchor-target" aria-labelledby="projects-title">
+      <div className="site-container">
+        <div className="section-heading">
+          <h2 id="projects-title">Projects</h2>
+          <p>Machine learning research, AI agents, and applications I’ve built.</p>
+        </div>
+
+        <article className="featured-project">
+          <div className="featured-copy">
+            <p className="eyebrow">{featured.category}</p>
+            <h3>{featured.title}</h3>
+            <p>{featured.description}</p>
+            <ul className="contribution-list">
+              {featured.details.map((detail) => <li key={detail}>{detail}</li>)}
+            </ul>
+            <TechnologyList items={featured.tech} />
+            {featured.githubUrl && <RepositoryLink href={featured.githubUrl} title={featured.title} />}
           </div>
-        </Reveal>
 
-        <div className="mt-12 grid gap-4 lg:grid-cols-2">
-          {PORTFOLIO_DATA.projects.map((project, index) => (
-            <Reveal key={project.title} delay={0.08 * index} className="h-full">
-              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink-700 bg-white p-6 transition duration-500 hover:-translate-y-1 hover:border-acid/55 hover:shadow-glow sm:p-8">
-                <div className="absolute right-0 top-0 h-48 w-48 translate-x-1/3 -translate-y-1/3 rounded-full bg-acid/[0.06] blur-3xl transition duration-500 group-hover:bg-acid/[0.12]" />
-                <div className="relative flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl border border-ink-700 bg-ink-950 text-acid">
-                      {index === 0 ? <GitBranch size={18} /> : <Layers3 size={18} />}
-                    </span>
-                    <span className="font-mono text-[0.66rem] tracking-[0.2em] text-ink-600">0{index + 1}</span>
-                  </div>
-                  <span className="rounded-full border border-acid/30 bg-acid/[0.09] px-3 py-1.5 font-mono text-[0.6rem] font-semibold uppercase tracking-[0.14em] text-acid">
-                    {project.type}
-                  </span>
-                </div>
+          <div className="graph-visual" aria-hidden="true">
+            <div className="graph-visual-heading">
+              <Code2 size={17} />
+              <span>C/C++ source</span>
+            </div>
+            <div className="graph-inputs">
+              <span>AST</span>
+              <span>Control flow</span>
+              <span>Data flow</span>
+            </div>
+            <div className="graph-model">
+              <GitBranch size={26} />
+              <span>Graph Transformer</span>
+            </div>
+            <div className="graph-output">Vulnerability classification</div>
+          </div>
+        </article>
 
-                <h3 className="relative mt-9 max-w-md text-2xl font-semibold leading-tight tracking-[-0.04em] text-ink-50 sm:text-3xl">
-                  {project.title}
-                </h3>
-                <p className="relative mt-5 max-w-xl text-sm leading-7 text-ink-300">{project.description}</p>
+        <div className="project-grid">
+          {moreProjects.map((project) => {
+            const Icon = projectIcons[project.id] ?? Code2;
 
-                <div className="relative mt-8 flex flex-wrap gap-2">
-                  {project.tech.map((technology) => (
-                    <span key={technology} className="rounded-full border border-ink-700 bg-ink-950 px-3 py-1.5 font-mono text-[0.62rem] text-ink-400">
-                      {technology}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="relative mt-auto pt-10">
-                  <a
-                    href={project.githubUrl}
-                    aria-label={`Open ${project.title} GitHub repository`}
-                    className="inline-flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-ink-200 transition hover:text-acid"
-                  >
-                    <ExternalLink size={14} />
-                    GitHub repository
-                    <ArrowUpRight size={14} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                </div>
+            return (
+              <article className="project-card" key={project.id}>
+                <div className="project-icon"><Icon size={22} aria-hidden="true" /></div>
+                <p className="eyebrow">{project.category}</p>
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <details className="project-details">
+                  <summary>My contributions</summary>
+                  <ul className="contribution-list">
+                    {project.details.map((detail) => <li key={detail}>{detail}</li>)}
+                  </ul>
+                </details>
+                <TechnologyList items={project.tech} />
+                {project.githubUrl && <RepositoryLink href={project.githubUrl} title={project.title} />}
               </article>
-            </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

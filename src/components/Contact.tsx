@@ -1,55 +1,46 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import { AlertCircle, ArrowUpRight, CheckCircle2, Github, Linkedin, Loader2, Mail, X } from "lucide-react";
+import { AlertCircle, CheckCircle2, Clipboard, Github, Linkedin, Loader2, Mail, X } from "lucide-react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import { PORTFOLIO_DATA } from "@/src/data/portfolio_data";
 import { CopyEmailButton } from "./CopyEmailButton";
-import { Reveal } from "./Reveal";
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 const WEB3FORMS_ACCESS_KEY = "195abc19-1067-4a62-8320-e5357c63275e";
+const INPUT_CLASS = "block w-full rounded-lg border border-[#c9d1c7] bg-white px-4 py-3 font-normal text-[#151b16] placeholder:text-[#59645a]";
 
 type SubmissionState = "idle" | "sending" | "success" | "error";
 
 export function Contact() {
   const { hero } = PORTFOLIO_DATA;
-  const [isOpen, setIsOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const confirmationRef = useRef<HTMLHeadingElement>(null);
   const [submissionState, setSubmissionState] = useState<SubmissionState>("idle");
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (submissionState === "success" && dialogRef.current?.open) {
+      confirmationRef.current?.focus();
+    }
+  }, [submissionState]);
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
-    };
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
-
-  const openContactForm = () => {
-    setSubmissionState("idle");
-    setIsOpen(true);
-  };
-
-  const closeContactForm = () => {
-    if (submissionState !== "sending") setIsOpen(false);
+  const handleClose = () => {
+    if (submissionState === "success") setSubmissionState("idle");
+    triggerRef.current?.focus();
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    setSubmissionState("sending");
+    if (submissionState === "sending") return;
 
+    const form = event.currentTarget;
     const formData = new FormData(form);
+    const subject = String(formData.get("subject") ?? "").trim();
+
     formData.set("access_key", WEB3FORMS_ACCESS_KEY);
     formData.set("to_email", hero.email);
-    formData.set("subject", "New message from Nguyen Dinh Hung portfolio");
+    formData.set("subject", subject || "New message from Nguyen Dinh Hung portfolio");
+    setSubmissionState("sending");
 
     try {
       const response = await fetch(WEB3FORMS_ENDPOINT, {
@@ -60,7 +51,6 @@ export function Contact() {
       const result = (await response.json()) as { success?: boolean };
 
       if (!response.ok || !result.success) throw new Error("Unable to send message");
-
       form.reset();
       setSubmissionState("success");
     } catch {
@@ -68,92 +58,119 @@ export function Contact() {
     }
   };
 
+  const sending = submissionState === "sending";
+  const emailUrl = `mailto:${hero.email}`;
+
   return (
-    <>
-      <section id="contact" className="anchor-target px-5 pb-20 pt-10 sm:px-8 sm:pb-28 lg:px-10">
-        <Reveal>
-          <div className="mx-auto max-w-6xl overflow-hidden rounded-3xl border border-acid/40 bg-[linear-gradient(135deg,rgba(138,203,47,0.18),rgba(255,255,255,0.98)_42%,rgba(225,242,234,0.94))] p-7 sm:p-10 lg:p-14">
-            <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
-              <div className="max-w-xl">
-                <p className="mb-5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-acid">06 / Open channel</p>
-                <h2 className="text-3xl font-semibold tracking-[-0.05em] text-ink-50 sm:text-5xl">Have a hard problem?</h2>
-                <p className="mt-5 max-w-lg text-sm leading-7 text-ink-300 sm:text-base">
-                  Tell me what you&apos;re building, what could go wrong, and where you want to take it. I&apos;d love to help make the system stronger.
-                </p>
-              </div>
-              <button type="button" onClick={openContactForm} className="group inline-flex shrink-0 items-center gap-3 self-start rounded-full bg-[#8bd438] px-5 py-3.5 text-sm font-semibold text-ink-50 transition hover:bg-[#a8e34a] md:self-auto">
-                Start a conversation
-                <ArrowUpRight size={17} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
+    <section id="contact" aria-labelledby="contact-heading" className="anchor-target pb-16 pt-10 sm:pb-24 sm:pt-16">
+      <div className="site-container">
+        <div className="rounded-3xl bg-[#151b16] px-6 py-9 text-[#f7f8f3] sm:px-10 sm:py-12 lg:px-14">
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+            <div className="max-w-xl">
+              <p className="eyebrow !text-[#dbf578]">Contact</p>
+              <h2 id="contact-heading" className="mt-4 text-4xl font-semibold leading-tight tracking-[-0.045em] sm:text-5xl">
+                Let&apos;s get in touch
+              </h2>
+              <p className="mt-4 text-base leading-7 text-[#c4cec4]">
+                Reach out to discuss opportunities and collaborations in software engineering, AI, or security.
+              </p>
             </div>
-            <div className="mt-10 flex flex-col justify-between gap-5 border-t border-ink-700 pt-5 sm:flex-row sm:items-center">
-              <CopyEmailButton email={hero.email} className="font-mono text-left text-xs text-ink-200 transition hover:text-acid" label="Copy email address">
-                {hero.email}
-              </CopyEmailButton>
-              <div className="flex items-center gap-4">
-                <a href={`https://${hero.github}`} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="text-ink-400 transition hover:text-acid"><Github size={17} /></a>
-                <a href={hero.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="text-ink-400 transition hover:text-acid"><Linkedin size={17} /></a>
-                <CopyEmailButton email={hero.email} className="text-ink-400 transition hover:text-acid" label="Copy email address"><Mail size={17} /></CopyEmailButton>
-              </div>
-            </div>
+            <button ref={triggerRef} type="button" onClick={() => dialogRef.current?.showModal()} className="button button-primary self-start md:shrink-0 md:self-end">
+              <Mail size={18} aria-hidden="true" />
+              Send a message
+            </button>
           </div>
-        </Reveal>
-      </section>
-
-      {isOpen ? (
-        <div className="fixed inset-0 z-[100] grid place-items-center bg-ink-50/25 p-4 backdrop-blur-sm" onMouseDown={(event) => event.target === event.currentTarget && closeContactForm()}>
-          <div role="dialog" aria-modal="true" aria-labelledby="contact-dialog-title" className="w-full max-w-lg overflow-hidden rounded-3xl border border-ink-700 bg-white shadow-[0_24px_90px_rgba(40,72,56,0.24)]">
-            <div className="flex items-start justify-between border-b border-ink-700 px-6 py-5 sm:px-7">
-              <div>
-                <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-acid">Send a message</p>
-                <h2 id="contact-dialog-title" className="mt-2 text-2xl font-semibold tracking-[-0.04em] text-ink-50">Let&apos;s build something useful.</h2>
-                <p className="mt-2 text-sm text-ink-300">Your message will be sent directly to {hero.email}.</p>
-              </div>
-              <button type="button" onClick={closeContactForm} aria-label="Close contact form" className="rounded-full border border-ink-700 p-2 text-ink-400 transition hover:border-acid hover:text-ink-50">
-                <X size={17} />
-              </button>
+          <div className="mt-9 flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-[#354134] pt-5">
+            <div className="flex min-w-0 items-center gap-2">
+              <a href={emailUrl} className="min-w-0 break-all text-sm font-medium text-[#f7f8f3] underline-offset-4 hover:underline sm:text-base">
+                {hero.email}
+              </a>
+              <CopyEmailButton email={hero.email} className="grid size-10 shrink-0 place-items-center rounded-lg text-[#c4cec4] transition hover:bg-[#29352a] hover:text-[#dbf578]">
+                <Clipboard size={16} aria-hidden="true" />
+              </CopyEmailButton>
             </div>
-
-            {submissionState === "success" ? (
-              <div className="px-6 py-10 text-center sm:px-7">
-                <CheckCircle2 size={38} className="mx-auto text-acid" />
-                <h3 className="mt-5 text-xl font-semibold text-ink-50">Message sent.</h3>
-                <p className="mt-2 text-sm leading-6 text-ink-300">Thanks for reaching out. I&apos;ll get back to you as soon as possible.</p>
-                <button type="button" onClick={closeContactForm} className="mt-7 rounded-full bg-[#8bd438] px-5 py-3 text-sm font-semibold text-ink-50 transition hover:bg-[#a8e34a]">Close</button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5 px-6 py-6 sm:px-7">
-                <input type="hidden" name="botcheck" />
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="space-y-2 text-sm font-semibold text-ink-100">
-                    Name
-                    <input name="name" type="text" required placeholder="Your name" className="w-full rounded-xl border border-ink-700 bg-ink-950 px-4 py-3 font-normal text-ink-50 outline-none transition placeholder:text-ink-400 focus:border-acid focus:ring-4 focus:ring-acid/10" />
-                  </label>
-                  <label className="space-y-2 text-sm font-semibold text-ink-100">
-                    Email
-                    <input name="email" type="email" required placeholder="you@example.com" className="w-full rounded-xl border border-ink-700 bg-ink-950 px-4 py-3 font-normal text-ink-50 outline-none transition placeholder:text-ink-400 focus:border-acid focus:ring-4 focus:ring-acid/10" />
-                  </label>
-                </div>
-                <label className="block space-y-2 text-sm font-semibold text-ink-100">
-                  Subject
-                  <input name="subject_input" type="text" placeholder="What would you like to discuss?" className="w-full rounded-xl border border-ink-700 bg-ink-950 px-4 py-3 font-normal text-ink-50 outline-none transition placeholder:text-ink-400 focus:border-acid focus:ring-4 focus:ring-acid/10" />
-                </label>
-                <label className="block space-y-2 text-sm font-semibold text-ink-100">
-                  Message
-                  <textarea name="message" required rows={5} placeholder="Tell me a little about the project..." className="w-full resize-y rounded-xl border border-ink-700 bg-ink-950 px-4 py-3 font-normal leading-6 text-ink-50 outline-none transition placeholder:text-ink-400 focus:border-acid focus:ring-4 focus:ring-acid/10" />
-                </label>
-                {submissionState === "error" ? (
-                  <p role="alert" className="flex items-center gap-2 text-sm font-semibold text-red-700"><AlertCircle size={16} />Something went wrong. Please try again or email me directly.</p>
-                ) : null}
-                <button type="submit" disabled={submissionState === "sending"} className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#8bd438] px-5 py-3.5 text-sm font-semibold text-ink-50 transition hover:bg-[#a8e34a] disabled:cursor-wait disabled:opacity-70">
-                  {submissionState === "sending" ? <Loader2 size={17} className="animate-spin" /> : <Mail size={17} />}
-                  {submissionState === "sending" ? "Sending..." : "Send message"}
-                </button>
-              </form>
-            )}
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <a href={hero.github} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-md text-sm font-medium text-[#c4cec4] transition hover:text-[#dbf578]">
+                <Github size={17} aria-hidden="true" />
+                GitHub
+              </a>
+              <a href={hero.linkedin} target="_blank" rel="noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-md text-sm font-medium text-[#c4cec4] transition hover:text-[#dbf578]">
+                <Linkedin size={17} aria-hidden="true" />
+                LinkedIn
+              </a>
+            </div>
           </div>
         </div>
-      ) : null}
-    </>
+      </div>
+
+      <dialog
+        ref={dialogRef}
+        aria-labelledby="contact-dialog-title"
+        onClose={handleClose}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) event.currentTarget.close();
+        }}
+        className="m-auto max-h-[calc(100dvh_-_2rem)] w-[calc(100%_-_2rem)] max-w-lg overflow-y-auto rounded-2xl border border-[#c9d1c7] bg-[#f7f8f3] p-0 text-[#151b16] shadow-2xl backdrop:bg-black/60 backdrop:backdrop-blur-sm"
+      >
+        <div className="relative p-5 sm:p-7">
+          <button
+            type="button"
+            aria-label="Close contact form"
+            onClick={() => dialogRef.current?.close()}
+            className="absolute right-4 top-4 grid size-10 place-items-center rounded-lg text-[#435147] transition hover:bg-[#e9ede5] hover:text-[#151b16]"
+          >
+            <X size={19} aria-hidden="true" />
+          </button>
+          <h2 id="contact-dialog-title" className="pr-12 text-2xl font-semibold tracking-tight">Send a message</h2>
+
+          {submissionState === "success" ? (
+            <div className="py-7">
+              <CheckCircle2 size={28} className="text-[#367039]" aria-hidden="true" />
+              <h3 ref={confirmationRef} tabIndex={-1} className="mt-4 text-lg font-semibold">Message sent</h3>
+              <p className="mt-2 text-[#435147]">Thanks for reaching out.</p>
+              <button type="button" onClick={() => dialogRef.current?.close()} className="button button-secondary mt-6">Done</button>
+            </div>
+          ) : (
+            <>
+              <p className="mt-2 text-sm text-[#435147]">
+                You can also <a href={emailUrl} className="font-semibold underline underline-offset-2">email me directly</a>.
+              </p>
+              <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <input type="hidden" name="botcheck" />
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <label className="block space-y-2 text-sm font-semibold">
+                    <span>Name</span>
+                    <input type="text" name="name" autoComplete="name" required className={INPUT_CLASS} />
+                  </label>
+                  <label className="block space-y-2 text-sm font-semibold">
+                    <span>Email</span>
+                    <input type="email" name="email" autoComplete="email" required className={INPUT_CLASS} />
+                  </label>
+                </div>
+                <label className="block space-y-2 text-sm font-semibold">
+                  <span>Subject</span>
+                  <input type="text" name="subject" className={INPUT_CLASS} />
+                </label>
+                <label className="block space-y-2 text-sm font-semibold">
+                  <span>Message</span>
+                  <textarea name="message" required rows={4} className={`${INPUT_CLASS} resize-y`} />
+                </label>
+                {submissionState === "error" ? (
+                  <p role="alert" className="flex items-start gap-2 text-sm font-semibold text-[#9a2421]">
+                    <AlertCircle size={16} className="mt-0.5 shrink-0" aria-hidden="true" />
+                    Your message could not be sent. Try again or email me directly.
+                  </p>
+                ) : null}
+                <p role="status" className="sr-only">{sending ? "Sending message" : ""}</p>
+                <button type="submit" disabled={sending} className="button button-primary w-full disabled:cursor-wait disabled:opacity-70">
+                  {sending ? <Loader2 size={18} className="animate-spin" aria-hidden="true" /> : <Mail size={18} aria-hidden="true" />}
+                  {sending ? "Sending…" : "Send message"}
+                </button>
+              </form>
+            </>
+          )}
+        </div>
+      </dialog>
+    </section>
   );
 }

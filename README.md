@@ -1,14 +1,12 @@
 # Nguyen Dinh Hung — Portfolio
 
-A bright, responsive portfolio for a software engineer and AI builder working at the intersection of cybersecurity, multi-agent systems, RAG, and deep learning.
+A responsive portfolio for Nguyen Dinh Hung, an AI Automation Engineer working on AI-agent workflows and applied machine learning.
 
 ## Stack
 
 - Next.js App Router + React + TypeScript
 - Tailwind CSS
-- Framer Motion for reveal animations
 - Lucide React for interface icons
-- `clsx` and `tailwind-merge` for composable styling
 
 ## Local development
 
@@ -34,7 +32,8 @@ portfolio/
 ├── app/
 │   ├── globals.css       # Tailwind layers and global visual system
 │   ├── layout.tsx        # Metadata and root layout
-│   └── page.tsx          # Page composition
+│   ├── page.tsx          # Portfolio
+│   └── resume/          # Print-friendly résumé
 ├── src/
 │   ├── components/       # Hero, about, skills, experience, projects, contact
 │   └── data/
@@ -49,4 +48,4 @@ The original static files are retained at the repository root as legacy referenc
 
 ## Content updates
 
-Edit `src/data/portfolio_data.ts` to update profile, skills, experience, and projects. Replace the placeholder project URLs with the final public repositories when they are ready. The resume CTA currently points to the existing Drive folder from the legacy site; add a direct PDF URL when one is available.
+Edit `src/data/portfolio_data.ts` to update the profile, experience, education, skills, and projects shared by the portfolio and résumé. Add a `githubUrl` only for projects with a public repository. Visitors can open `/resume` to print or save a PDF using their browser.
