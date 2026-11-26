@@ -1,4 +1,3 @@
-import { GraduationCap, Trophy } from "lucide-react";
 import { PORTFOLIO_DATA } from "@/src/data/portfolio_data";
 
 export function About() {
@@ -6,14 +5,15 @@ export function About() {
 
   return (
     <section id="about" className="section-band about-section anchor-target" aria-labelledby="about-title">
-      <div className="site-container">
+      <div className="site-container section-columns">
         <div className="section-heading">
-          <h2 id="about-title">Education & achievements</h2>
+          <p className="kicker">03 / Background</p>
+          <h2 id="about-title">Education &amp;<br /> achievements</h2>
         </div>
 
         <div className="about-grid">
           <article className="about-card">
-            <GraduationCap size={24} aria-hidden="true" />
+            <p className="kicker">Degree</p>
             <h3>{education.degree}</h3>
             <p>{education.school}</p>
             <p className="about-meta">
@@ -24,7 +24,7 @@ export function About() {
 
           {achievements.map((achievement) => (
             <article className="about-card" key={achievement.title}>
-              <Trophy size={24} aria-hidden="true" />
+              <p className="kicker">Competition</p>
               <h3>{achievement.title}</h3>
               <p>{achievement.description}</p>
               <dl className="race-scores">

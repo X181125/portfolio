@@ -1,16 +1,8 @@
 "use client";
 
-import { AlertCircle, Check } from "lucide-react";
-import type { ReactNode } from "react";
+import { AlertCircle, Check, Clipboard } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-
-type CopyEmailButtonProps = {
-  email: string;
-  children: ReactNode;
-  className?: string;
-  label?: string;
-};
 
 type CopyStatus = "copied" | "failed";
 
@@ -43,12 +35,7 @@ async function writeToClipboard(email: string) {
   }
 }
 
-export function CopyEmailButton({
-  email,
-  children,
-  className,
-  label = "Copy email address",
-}: CopyEmailButtonProps) {
+export function CopyEmailButton({ email }: { email: string }) {
   const [status, setStatus] = useState<CopyStatus | null>(null);
 
   useEffect(() => {
@@ -60,22 +47,27 @@ export function CopyEmailButton({
 
   const message = status === "copied" ? "Email address copied" : "Could not copy the email address";
 
+  async function handleCopy() {
+    const copied = await writeToClipboard(email);
+    setStatus(copied ? "copied" : "failed");
+  }
+
   return (
     <>
       <button
         type="button"
-        onClick={async () => setStatus(await writeToClipboard(email) ? "copied" : "failed")}
-        aria-label={label}
-        className={className}
+        onClick={handleCopy}
+        aria-label="Copy email address"
+        className="icon-button"
       >
-        {children}
+        <Clipboard size={16} aria-hidden="true" />
       </button>
       <span role="status" className="sr-only">{status ? message : ""}</span>
       {status ? createPortal(
-        <div aria-hidden="true" className="pointer-events-none fixed bottom-6 left-1/2 z-[120] inline-flex w-max max-w-[90vw] -translate-x-1/2 items-center gap-2 rounded-full border border-[#354134] bg-[#151b16] px-4 py-3 text-sm font-semibold text-[#f7f8f3] shadow-lg">
+        <div aria-hidden="true" className="copy-feedback">
           {status === "copied"
-            ? <Check size={16} className="shrink-0 text-[#dbf578]" />
-            : <AlertCircle size={16} className="shrink-0 text-[#ffc5b8]" />}
+            ? <Check size={16} />
+            : <AlertCircle size={16} />}
           {message}
         </div>,
         document.body,

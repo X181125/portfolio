@@ -22,7 +22,7 @@ export default function Home() {
       </main>
       <footer className="site-footer">
         <div className="site-container">
-          <p>© {new Date().getFullYear()} {PORTFOLIO_DATA.hero.name}</p>
+          <p>© {new Date().getFullYear()} {PORTFOLIO_DATA.profile.name}</p>
           <a href="#top">Back to top</a>
         </div>
       </footer>

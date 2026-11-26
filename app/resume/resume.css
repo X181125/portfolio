@@ -1,11 +1,10 @@
 .resume-page {
-  --resume-accent: #dbf578;
-  --resume-ink: #22231d;
-  --resume-muted: #5a5d50;
-  --resume-line: #dedfd3;
+  --resume-ink: var(--ink);
+  --resume-muted: var(--muted);
+  --resume-line: var(--rule);
   min-height: 100vh;
   padding-block: clamp(1.5rem, 5vw, 4rem);
-  background: #f4f3ec;
+  background: var(--wash);
   color: var(--resume-ink);
 }
 
@@ -24,9 +23,8 @@
 .resume-sheet {
   padding: clamp(1.4rem, 5.5vw, 4.25rem);
   border: 1px solid var(--resume-line);
-  border-radius: 1rem;
-  background: #fffef9;
-  box-shadow: 0 1rem 3rem rgb(34 35 29 / 6%);
+  border-top: 3px solid var(--brick);
+  background: var(--paper);
   overflow-wrap: anywhere;
 }
 
@@ -36,8 +34,9 @@
 }
 
 .resume-header h1 {
+  font-family: var(--serif);
   font-size: clamp(2.35rem, 6vw, 4.5rem);
-  font-weight: 650;
+  font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.07em;
 }
@@ -45,9 +44,8 @@
 .resume-role {
   display: inline-block;
   margin-top: 0.9rem;
-  padding: 0.27rem 0.6rem;
-  border-radius: 0.2rem;
-  background: var(--resume-accent);
+  color: var(--brick);
+  font-family: var(--mono);
   font-size: 0.95rem;
   font-weight: 650;
 }
@@ -93,6 +91,7 @@
 }
 
 .resume-section h2 {
+  font-family: var(--mono);
   margin-bottom: 0.8rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--resume-line);
@@ -239,6 +238,7 @@
 
   .resume-role {
     margin-top: 5pt;
+    color: var(--resume-ink);
     padding: 0;
     background: transparent;
     font-size: 11pt;

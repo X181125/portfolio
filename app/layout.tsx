@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import { PORTFOLIO_DATA } from "@/src/data/portfolio_data";
 import "./globals.css";
 
-const { hero } = PORTFOLIO_DATA;
+const { name, tagline, description } = PORTFOLIO_DATA.profile;
+const title = `${name} | ${tagline}`;
 
 export const metadata: Metadata = {
-  title: `${hero.name} | ${hero.tagline}`,
-  description: hero.description,
+  title,
+  description,
   openGraph: {
-    title: `${hero.name} | ${hero.tagline}`,
-    description: hero.description,
+    title,
+    description,
     type: "website",
   },
 };
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">

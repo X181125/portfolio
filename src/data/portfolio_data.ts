@@ -1,4 +1,4 @@
-type Project = {
+export type Project = {
   id: string;
   title: string;
   category: string;
@@ -9,29 +9,32 @@ type Project = {
 };
 
 type ExperienceItem = {
+  id: string;
   role: string;
   company: string;
   period: string;
-  startDate: string;
-  endDate?: string;
+  current?: boolean;
   points: readonly string[];
 };
 
-const projects: readonly Project[] = [
-  {
-    id: "graph-transformer",
-    title: "Graph Transformer for Vulnerability Detection",
-    category: "Applied deep learning",
-    description:
-      "A PyTorch research project that classifies vulnerabilities in C/C++ code using structural and program-flow information.",
-    details: [
-      "Represented C/C++ code as abstract syntax, control-flow, and data-flow graphs.",
-      "Built a dual-view Graph Transformer with edge-aware attention in PyTorch.",
-      "Used TensorBoard to compare training runs and track model performance.",
-    ],
-    tech: ["Python", "PyTorch", "Graph Neural Networks", "TensorBoard"],
-    githubUrl: "https://github.com/X181125/Auto_Bug_Detection",
-  },
+const nameLines = ["Nguyen", "Dinh Hung"] as const;
+
+const featuredProject: Project = {
+  id: "graph-transformer",
+  title: "Graph Transformer for Vulnerability Detection",
+  category: "Applied deep learning",
+  description:
+    "A PyTorch research project that classifies vulnerabilities in C/C++ code using structural and program-flow information.",
+  details: [
+    "Represented C/C++ code as abstract syntax, control-flow, and data-flow graphs.",
+    "Built a dual-view Graph Transformer with edge-aware attention in PyTorch.",
+    "Used TensorBoard to compare training runs and track model performance.",
+  ],
+  tech: ["Python", "PyTorch", "Graph Neural Networks", "TensorBoard"],
+  githubUrl: "https://github.com/X181125/Auto_Bug_Detection",
+};
+
+const otherProjects: readonly Project[] = [
   {
     id: "real-time-auction",
     title: "Real-Time Auction Website",
@@ -74,10 +77,11 @@ const projects: readonly Project[] = [
 
 const experience: readonly ExperienceItem[] = [
   {
+    id: "lien-chau-automation",
     role: "AI Automation Engineer",
     company: "Lien Chau Weaving Production Joint Stock Company",
     period: "Oct 2026 – Present",
-    startDate: "2026-10",
+    current: true,
     points: [
       "Analyze internal workflows and identify bottlenecks and repetitive tasks.",
       "Build AI-agent tools that automate routine office work and support day-to-day operations.",
@@ -85,11 +89,10 @@ const experience: readonly ExperienceItem[] = [
     ],
   },
   {
+    id: "cnsc-research-internship",
     role: "Cybersecurity Research Intern",
     company: "Certified Network Security Center (CNSC), UIT",
     period: "Mar – Jun 2026",
-    startDate: "2026-03",
-    endDate: "2026-06",
     points: [
       "Built a multi-agent RAG research prototype in an isolated environment.",
       "Integrated Model Context Protocol (MCP) for context retrieval and used structured outputs and failure handling in multi-step tasks.",
@@ -99,10 +102,10 @@ const experience: readonly ExperienceItem[] = [
 ];
 
 export const PORTFOLIO_DATA = {
-  hero: {
-    name: "Nguyen Dinh Hung",
-    firstName: "Nguyen",
-    lastName: "Dinh Hung",
+  profile: {
+    name: nameLines.join(" "),
+    nameLines,
+    initials: "NH",
     tagline: "AI Automation Engineer",
     description:
       "I build AI agents and automation workflows for business operations. My information security background shapes how I design, test, and monitor LLM systems.",
@@ -129,15 +132,28 @@ export const PORTFOLIO_DATA = {
     },
   ],
   skills: [
-    { label: "AI and LLM engineering", items: ["Multi-agent systems", "RAG", "Prompt engineering", "MCP", "Graph neural networks"] },
-    { label: "Frameworks and tooling", items: ["PyTorch", "LangGraph", "LangChain", "FastAPI", "TensorBoard", "Pytest"] },
-    { label: "Programming and platforms", items: ["Python", "C/C++", "JavaScript", "SQL", "Git", "Linux"] },
-    { label: "Security engineering", items: ["Vulnerability assessment", "Secure coding", "Scope control", "Structured logging"] },
+    {
+      label: "AI and LLM engineering",
+      items: ["Multi-agent systems", "RAG", "Prompt engineering", "MCP", "Graph neural networks"],
+    },
+    {
+      label: "Frameworks and tooling",
+      items: ["PyTorch", "LangGraph", "LangChain", "FastAPI", "TensorBoard", "Pytest"],
+    },
+    {
+      label: "Programming and platforms",
+      items: ["Python", "C/C++", "JavaScript", "SQL", "Git", "Linux"],
+    },
+    {
+      label: "Security engineering",
+      items: ["Vulnerability assessment", "Secure coding", "Scope control", "Structured logging"],
+    },
   ],
   languages: [
     { name: "Vietnamese", proficiency: "Native" },
     { name: "English", proficiency: "TOEIC L&R 595, S&W 260" },
   ],
-  projects,
+  featuredProject,
+  otherProjects,
   experience,
 } as const;
